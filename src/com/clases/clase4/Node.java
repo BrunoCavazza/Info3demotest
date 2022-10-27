@@ -1,10 +1,13 @@
 package com.clases.clase4;
+import java.util.Scanner;
+import java.util.Random;
 
 public class Node {
 
     private Integer data;
     private Node left;
     private Node right;
+    private int height = 1; //avl
 
     public Node(Integer data) {
         this.data = data;
@@ -97,6 +100,7 @@ public class Node {
      * Imprimir el arbol ordenando.
      */
     public void printInOrderBinaryTree() {
+      
         if(left!=null){
             left.printInOrderBinaryTree();
         }
@@ -107,7 +111,19 @@ public class Node {
             right.printInOrderBinaryTree();
         }
     }
+    public void orderTreeAvl() {
+        
+        if(left!=null){
+            left.printInOrderBinaryTree();
+        }
 
+        System.out.println(data);
+
+        if(right!=null){
+            right.printInOrderBinaryTree();
+        }
+    }
+    
     public int depth(Node n) {
 
         if (n == null)
@@ -170,4 +186,55 @@ public class Node {
     public void setRight(Node right) {
         this.right = right;
     }
+    
+    //SECTOR AVL 
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public Avl randomAVL() {
+        int cant;
+        Avl avl = new Avl();
+        Scanner sc = new Scanner(System.in);
+        Random ran = new Random();
+        Integer temp;
+
+        System.out.println("Arbol AVL aleatorio");
+        System.out.println("Ingrese la cantidad de elementos del arbol AVL");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        for (int i = 0; i < cant; i++) {
+           temp =ran.nextInt(100);
+           System.out.print("\n" + i+1 + " Numero: " + temp);
+           avl.add(temp);
+        }
+        System.out.print("\n");
+        return avl;
+    }
+
+    public Avl manualAVL() {
+        int cant, data;
+        Avl avl = new Avl();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Arbol AVL manual");
+        System.out.println("Ingrese la cantidad de total de los elementos del arbol AVL");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        System.out.println("Ingrese los valores del arbol AVL:");
+
+        for (int i = 0; i < cant; i++) {
+            System.out.print("\nValor: ");
+            data = sc.nextInt();
+            avl.add(data);
+        }
+
+        return avl;
+    }
+    
 }
