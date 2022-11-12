@@ -1,9 +1,13 @@
 package Funciones;
+import Nodo.Node;
+import Nodo.Avl;
 import java.util.Scanner;
-import com.clases.clase4.Node;
+import java.util.Random;
+
 
 public class CrearNodo {
-    public static void creadorNodos(int tipo, Node nodo){
+
+    public static void creadorNodos(int tipo, Node<Integer> nodo){
         Scanner scanner = new Scanner(System.in);
         int contador=0, max, min, random;
         if (tipo == 1){
@@ -31,5 +35,46 @@ public class CrearNodo {
         }
 
     }
-    
+    public static Avl<Integer> randomAVL() {
+        int cant;
+        Avl<Integer> avl = new Avl<Integer>();
+        Scanner sc = new Scanner(System.in);
+        Random ran = new Random();
+        Integer temp;
+
+        System.out.println("Arbol AVL aleatorio");
+        System.out.println("Ingrese la cantidad de elementos del arbol AVL");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        for (int i = 0; i < cant; i++) {
+           temp =ran.nextInt(100);
+           System.out.print("\n" + (i+1) + " Numero: " + temp);
+           avl.add(temp);
+        }
+        System.out.print("\n ----------------------------------------");
+        System.out.print("\n");
+        return avl;
+    }
+
+    public static Avl<Integer> manualAVL() {
+        int cant, data;
+        Avl<Integer> avl = new Avl<Integer>();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Arbol AVL manual");
+        System.out.println("Ingrese la cantidad de total de los elementos del arbol AVL");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        System.out.println("Ingrese los valores del arbol AVL:");
+
+        for (int i = 0; i < cant; i++) {
+            System.out.print("\nValor: ");
+            data = sc.nextInt();
+            avl.add(data);
+        }
+
+        return avl;
+    }
 }
