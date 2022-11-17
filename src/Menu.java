@@ -2,6 +2,8 @@
 import java.util.Scanner;
 
 import Nodo.Avl;
+import Nodo.MonticuloMax;
+import Nodo.MonticuloMin;
 import Nodo.Node;
 import Funciones.CrearNodo;
 import java.io.PrintStream;
@@ -11,7 +13,9 @@ public class Menu {
     public static void ShowMenu() throws Exception{
         Node<Integer> nodo = new Node<>();
         Avl<Integer> avl = new Avl<>();
-        int opcion;
+        MonticuloMax<Integer> montMax = new MonticuloMax<>();
+        MonticuloMin<Integer> montMin = new MonticuloMin<>();
+        int opcion, eliminado;
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Ingrese primer nodo (a preguntar despues): ");
@@ -22,7 +26,8 @@ public class Menu {
         System.out.println("-----------------------------------");
         System.out.println("[1] Arbol Abb");
         System.out.println("[2] Arbol Avl");
-        System.out.println("[3] Arbol Monticulo");
+        System.out.println("[3] Arbol Monticulo (Maximo)");
+        System.out.println("[4] Arbol Monticulo (Minimo)");
         System.out.println("[0] Salir");
         System.out.println("-----------------------------------");
 
@@ -43,9 +48,10 @@ public class Menu {
                 }else {
                     System.out.println("[3] Mostrar arbol ordenado");
                     System.out.println("[4] Mostrar arbol con formato");
+                    System.out.println("[5] Borrar nodo");
                 };
                 
-                System.out.println("[5] Volver");
+                System.out.println("[6] Volver");
                 System.out.println("-----------------------------------");
 
                 opcion = scanner.nextInt();
@@ -59,7 +65,7 @@ public class Menu {
                     
                     case 3:
                     if(nodo.getRaiz() == null){
-                        System.out.println("Opcion no valida");
+                            throw new Exception("Opcion no valida.");
                         }else {
                             nodo.printInOrder();
                         };
@@ -68,21 +74,28 @@ public class Menu {
 
                     case 4:
                     if(nodo.getRaiz() == null){
-                        System.out.println("Opcion no valida");
+                            throw new Exception("Opcion no valida.");
                         }else {
                             nodo.printTree(nodo);
                         };
                         
                         break;
                     case 5:
-                         System.out.println("Volviendo al menu...");
+                    if(nodo.getRaiz() == null){
+                        throw new Exception("Opcion no valida.");
+                    }else {
+                        System.out.println("ingrese el nodo a borrar:");
+                        eliminado = scanner.nextInt();
+                        System.out.println("\n");
+                        nodo.delete(eliminado);
+                    };
                         break;
 
                     default:
                         System.out.println("Dale pibe pone bien los numeritos.");
                     break;
                     }
-                }while (opcion!=5);
+                }while (opcion!=6);
             break;
             
             case 2:// Arbol Avl
@@ -98,9 +111,10 @@ public class Menu {
                     }else {
                         System.out.println("[3] Mostrar arbol ordenado");
                         System.out.println("[4] Mostrar arbol con formato");
+                        System.out.println("[5] Borrar un nodo");
                     };
                     
-                System.out.println("[5] Volver");
+                System.out.println("[6] Volver");
                 System.out.println("-----------------------------------");
                
                 opcion = scanner.nextInt();
@@ -108,16 +122,17 @@ public class Menu {
 
                 switch(opcion){
                     case 1:
-                        avl = CrearNodo.randomAVL();
-                        break;
+                    CrearNodo.manualAVL(avl);
+                    break;
 
                     case 2:
-                        avl = CrearNodo.manualAVL();
+                    CrearNodo.randomAVL(avl);
                         break;
                         
+                        
                     case 3:
-                    if(avl.isEmpty()){
-                        System.out.println("Opcion no valida");
+                        if(avl.isEmpty()){
+                            throw new Exception("Opcion no valida.");
                         }else {
                             avl.printInOrderAvl();
                         };
@@ -125,78 +140,147 @@ public class Menu {
                         break;
 
                     case 4:
-                    if(avl.isEmpty()){
-                        System.out.println("Opcion no valida");
+                        if(avl.isEmpty()){
+                            throw new Exception("Opcion no valida.");
                         }else {
-                        avl.printTreeAvl(new PrintStream(System.out));
+                            avl.printTreeAvl(new PrintStream(System.out));
                         };
                        
                         break;
                     case 5:
-                         System.out.println("Volviendo al menu...");
+                    if(avl.isEmpty()){
+                        throw new Exception("Opcion no valida.");
+                    }else {
+                        System.out.println("ingresar nodo a eliminar:");
+                        eliminado = scanner.nextInt();
+                        System.out.println("\n");
+                        avl.delete(eliminado);
+                    };
+                         
                         break;
+                    default:
+                        System.out.println("Dale pibe pone bien los numeritos.");
+                    break;
                     }
-                }while (opcion!=5);
+                }while (opcion!=6);
             break;
             
-            case 3: // Arbol Monticulo
+            case 3: // Arbol Monticulo con raiz MAXIMO
                 do{
                 System.out.println("\n-----------------------------------");
-                System.out.println("Arbol Monticulo");
+                System.out.println("Arbol Monticulo Maximo");
                 System.out.println("-----------------------------------");
                 System.out.println("[1] Agregar nodos por teclado");
                 System.out.println("[2] Agregar nodos aleatorio");
 
-                if(avl.isEmpty()){//CAMBIAR POR MONTICULO EMPTY DESPUES
+                if(montMax.getMax() == null){
                     System.out.println("[#] Crear arbol para mas opciones");
                     }else {
-                        System.out.println("[3] Mostrar arbol ordenado");
+                        System.out.println("[3] Borrar Maximo");
                         System.out.println("[4] Mostrar arbol con formato");
                     };
-                System.out.println("[5] Volver");
+                System.out.println("[6] Volver");
                 System.out.println("-----------------------------------");
 
                 opcion = scanner.nextInt();
                 System.out.println("-----------------------------------\n");
                 switch(opcion){
                     case 1:
-                    
+                        CrearNodo.manualMontMax(montMax);
                         break;
 
                     case 2:
-                        
+                        CrearNodo.randomMontMax(montMax);
                         break;
                         
                     case 3:
-                    /*if( ){
-                        System.out.println("Opcion no valida");
+                        if(montMax.getMax() == null){
+                            throw new Exception("Opcion no valida.");
                         }else {
-                        
+                            montMax.borrarMax();
+                            System.out.println("Maximo Borrado Correctamente\n");
+                            System.out.println(montMax.printSortFormat(0,""));
                         };
-                       
-                    
-                    
-                        */
-                        break;
+                            
+                            break;
                         
                     case 4:
-                         /*if( ){
-                        System.out.println("Opcion no valida");
+                        if(montMax.getMax() == null){
+                            throw new Exception("Opcion no valida.");
                         }else {
-                        
+                            System.out.println(montMax.printSortFormat(0,""));
                         };
-                       
-                    
-                    
-                        */
                         break;
-                    case 5:
+                        
+                    case 6:
                         System.out.println("Volviendo al menu...");
-                       break;
+                        break;
+
+                    default:
+                        System.out.println("Dale pibe pone bien los numeritos.");
+                    break;
                     }
-                }while (opcion!=5);
+                }while (opcion!=6);
+            break;
+        
+
+            case 4: // Arbol Monticulo con raiz MINIMO
+                do{
+                    System.out.println("\n-----------------------------------");
+                    System.out.println("Arbol Monticulo Minimo");
+                    System.out.println("-----------------------------------");
+                    System.out.println("[1] Agregar nodos por teclado");
+                    System.out.println("[2] Agregar nodos aleatorio");
+
+                    if(montMin.getMin() == null){
+                        System.out.println("[#] Crear arbol para mas opciones");
+                    }else {
+                        System.out.println("[3] Borrar Minimo");
+                        System.out.println("[4] Mostrar arbol con formato");
+                    };
+                    System.out.println("[6] Volver");
+                    System.out.println("-----------------------------------");
+
+                    opcion = scanner.nextInt();
+                    System.out.println("-----------------------------------\n");
+                    switch(opcion){
+                        case 1:
+                            CrearNodo.manualMontMin(montMin);
+                            break;
+
+                        case 2:
+                            CrearNodo.randomMontMin(montMin);
+                            break;
+
+                        case 3:
+                        if(montMin.getMin() == null){
+                            throw new Exception("Opcion no valida.");
+                        }else {
+                            montMin.borrarMin();
+                            System.out.println("Minimo Borrado Correctamente\n");
+                            System.out.println(montMin.printSortFormat(0,""));
+                           
+                        };
+                        break;
+                        
+                        case 4:
+                            if(montMin.getMin() == null){
+                                throw new Exception("Opcion no valida.");
+                            }else {
+                                System.out.println(montMin.printSortFormat(0,""));
+                            };
+                            break;
+                       
+                        case 6:
+                            System.out.println("Volviendo al menu...");
+                            break;
+                    }
+                }while (opcion!=6);
             break;
             }
+
+
+
         }while (opcion!=0);
     }
 }

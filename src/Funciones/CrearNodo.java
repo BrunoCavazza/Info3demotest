@@ -1,9 +1,10 @@
 package Funciones;
+import Nodo.MonticuloMax;
+import Nodo.MonticuloMin;
 import Nodo.Node;
 import Nodo.Avl;
 import java.util.Scanner;
 import java.util.Random;
-
 
 public class CrearNodo {
 
@@ -35,15 +36,14 @@ public class CrearNodo {
         }
 
     }
-    public static Avl<Integer> randomAVL() {
+    public static void randomAVL(Avl<Integer> avl) {
         int cant;
-        Avl<Integer> avl = new Avl<Integer>();
         Scanner sc = new Scanner(System.in);
         Random ran = new Random();
         Integer temp;
 
         System.out.println("Arbol AVL aleatorio");
-        System.out.println("Ingrese la cantidad de elementos del arbol AVL");
+        System.out.println("Ingrese la cantidad a agregar aleatoriamente en arbol AVL");
         System.out.print("\nCantidad: ");
         cant = sc.nextInt();
 
@@ -54,16 +54,14 @@ public class CrearNodo {
         }
         System.out.print("\n ----------------------------------------");
         System.out.print("\n");
-        return avl;
     }
 
-    public static Avl<Integer> manualAVL() {
+    public static void manualAVL(Avl<Integer> avl) {
         int cant, data;
-        Avl<Integer> avl = new Avl<Integer>();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Arbol AVL manual");
-        System.out.println("Ingrese la cantidad de total de los elementos del arbol AVL");
+        System.out.println("Ingrese la cantidad total a agregar en arbol AVL");
         System.out.print("\nCantidad: ");
         cant = sc.nextInt();
 
@@ -74,7 +72,79 @@ public class CrearNodo {
             data = sc.nextInt();
             avl.add(data);
         }
+    }
 
-        return avl;
+    public static void manualMontMax(MonticuloMax<Integer> mont){
+        int cant, data;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Monticulo Maximo manual");
+        System.out.println("Ingrese la cantidad total a agregar en Monticulo Maximo");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        System.out.println("Ingrese los valores al Monticulo Maximo:");
+
+        for (int i = 0; i < cant; i++) {
+            System.out.print("\nValor: ");
+            data = sc.nextInt();
+            mont.add(data);
+        }
+    }
+
+    public static void manualMontMin(MonticuloMin<Integer> mont){
+        int cant, data;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Monticulo Minimo manual");
+        System.out.println("Ingrese la cantidad total a agregar en Monticulo Minimo");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        System.out.println("Ingrese los valores al Monticulo Minimo:");
+
+        for (int i = 0; i < cant; i++) {
+            System.out.print("\nValor: ");
+            data = sc.nextInt();
+            mont.add(data);
+        }
+    }
+
+    public static void randomMontMax(MonticuloMax<Integer> mont) {
+        int cant;
+        Scanner sc = new Scanner(System.in);
+        Random ran = new Random();
+        Integer temp;
+
+        System.out.println("Arbol Monticulo Maximo aleatorio");
+        System.out.println("Ingrese la cantidad a agregar aleatoriamente en arbol de Monticulo Maximo");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        for (int i = 0; i < cant; i++) {
+            temp = ran.nextInt(100);
+            System.out.print("\n" + (i+1) + " Numero: " + temp);
+            mont.add(temp);
+        }
+        System.out.print("\n ----------------------------------------");
+        System.out.print("\n");
+    }
+
+    public static void randomMontMin(MonticuloMin<Integer> mont) {
+        int cant;
+        Scanner sc = new Scanner(System.in);
+        Random ran = new Random();
+        Integer temp;
+
+        System.out.println("Arbol Monticulo Minimo aleatorio");
+        System.out.println("Ingrese la cantidad a agregar aleatoriamente en arbol de Monticulo Minimo");
+        System.out.print("\nCantidad: ");
+        cant = sc.nextInt();
+
+        for (int i = 0; i < cant; i++) {
+            temp = ran.nextInt(100);
+            System.out.print("\n" + (i+1) + " Numero: " + temp);
+            mont.add(temp);
+        }
+        System.out.print("\n ----------------------------------------");
+        System.out.print("\n");
     }
 }
